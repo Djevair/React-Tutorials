@@ -1,0 +1,1056 @@
+/<------------------------------------------------------->/
+1. import Header from './Header.jsx';
+import Footer from './Footer.jsx';
+import Food from './Food.jsx';
+function App() {
+  return(
+    <>
+    <Header/>
+    <Food/>
+    <Footer/>
+    </>
+  );
+  
+}
+export default App
+
+function Header(){
+    return(
+        <header>
+            <h1>My Website</h1>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+            <hr />
+        </header>
+    );
+}
+export default Header
+
+
+function Footer(){
+    return(
+        <footer>
+            <p>&copy; {new Date().getFullYear()}Your Website Name</p>
+        </footer>
+    );
+}
+export default Footer;
+
+function Food(){    
+    const food1 = "Orange";
+    const food2 = "Banana";
+    return(
+        <ul>
+            <li>Apple</li>
+            <li>{food1}</li>
+            <li>{food2.toUpperCase()}</li>
+        </ul>
+    );
+}
+export default Food;
+
+/<------------------------------------------------------->/
+2. import Card from './Card.jsx'
+function App() {
+  return(
+    <>
+      <Card />
+      <Card />
+    </>
+  );
+  
+}
+export default App
+
+import profilePic from './assets/isagi.jpg'
+
+function Card(){
+    return(
+        <div className="card">
+            <img className="card-image" src={profilePic} alt="Profile Picture" />
+            <h2 className="card-title">Dzeko Avmedoski</h2>
+            <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid quia animi maxime obcaecati nobis praesentium qui quas. Fuga iusto vero veritatis praesentium ipsum totam, incidunt laboriosam et sunt neque voluptate.</p>
+        </div>
+    );
+}
+export default Card;
+.card{
+  border: 1px solid black;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px grey;
+  padding: 20px;
+  margin: 10px;
+  text-align: center;
+  max-width: 250px;
+  display: inline-block;
+}
+.card-image{
+  max-width: 60%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.card-title{
+  font-family: Arial, sans-serif;
+  margin: 0;
+  color: darkblue;
+}
+.card-text{
+  font-family: Arial, sans-serif;
+  color: red;
+}
+
+/<------------------------------------------------------->/
+3. External Style
+function Button(){
+    return(
+        <button className="button">Click me</button>
+    );
+}
+export default Button;
+
+Modules
+import styles from './Button.module.css'
+function Button(){
+    return(
+        <button className={styles.button}>Click me</button>
+    );
+}
+
+export default Button;
+
+Inline
+function Button(){
+    const styles = {
+        backgroundColor: "hsl(200, 100%, 50%)",
+        color: "white",
+        padding: "10px 20px",
+        borderRadius: "5px",
+        border: "none",
+        cursor: "pointer",
+    }
+    return(
+        <button style={styles}>Click me</button>
+    );
+}
+
+export default Button;
+
+/<------------------------------------------------------->/
+4.  (Props)
+import Student from './Students.jsx';
+function App() {
+  return(
+    <>
+      <Student name="Dzeko" age={23} isStudent={false}/>      
+      <Student name="BroCode" age={25} isStudent={true}/>      
+      <Student name="Test" age={34} isStudent={true}/>     
+    </>
+  );
+  
+}
+export default App
+
+function Student(props){
+    return(
+        <div className="student">
+            <p>Name: {props.name}</p>
+            <p>Age: {props.age}</p>
+            <p>Is a Student: {props.isStudent ? "Yes" : "No"}</p>
+        </div>
+    );
+}
+export default Student;
+
+(propTypes)
+import PropTypes from 'prop-types';
+
+function Student(props){
+    return(
+        <div className="student">
+            <p>Name: {props.name}</p>
+            <p>Age: {props.age}</p>
+            <p>Is a Student: {props.isStudent ? "Yes" : "No"}</p>
+        </div>
+    );
+}
+Student.propTypes = {
+    name : PropTypes.string,
+    age : PropTypes.number,
+    isStudent : PropTypes.bool
+}
+export default Student;
+
+(defaultProps)
+import PropTypes from 'prop-types';
+
+function Student(props){
+    return(
+        <div className="student">
+            <p>Name: {props.name}</p>
+            <p>Age: {props.age}</p>
+            <p>Is a Student: {props.isStudent ? "Yes" : "No"}</p>
+        </div>
+    );
+}
+Student.propTypes = {
+    name : PropTypes.string,
+    age : PropTypes.number,
+    isStudent : PropTypes.bool
+}
+Student.defaultProps = {
+    name : "Guest",
+    age : 0,
+    isStudent : false
+}
+export default Student;
+
+/<------------------------------------------------------->/
+5. 
+import PropTypes from 'prop-types';
+function UserGreeting(props){
+    const welcomeMessage = <h2 className="welcome-msg">Welcome {props.username}</h2>;
+    const loginPrompt = <h2 className="login-prompt">Please log in to continue</h2>;
+    return(props.isLoggedIn ? welcomeMessage : loginPrompt) 
+}
+UserGreeting.proptypes = {
+    isLoggedIn : PropTypes.bool,
+    username : PropTypes.string,
+}
+UserGreeting.defaultProps = {
+    isLoggedIn : false,
+    username : "Guest"
+}
+export default UserGreeting;
+
+
+function App() {
+  return(
+    <>
+      <UserGreeting isLoggedIn={true} username="Emgeko"/>    
+    </>
+  );
+}
+export default App
+.welcome-msg{
+  font-size: 2.5em;
+  background-color: aquamarine;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0;
+}
+.login-prompt{
+  font-size: 2.5em;
+  background-color: red;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0;
+}
+
+/<------------------------------------------------------->/
+6.
+function List(){
+    const fruits = ["banana","apple","orange","coconut","pineapple"];
+    fruits.sort()
+    const listItems = fruits.map(fruit => <li>{fruit}</li>);
+    return(<ol>{listItems}</ol>);
+}
+export default List
+
+function List(){
+    const fruits = [{id: 1, name : "banana", calories : 95},{id : 2,name : "apple", calories : 45},{id : 3, name : "orange", calories : 105},{id : 4, name: "coconut", calories : 159},{id : 5, name: "pineapple", calories : 37}];
+    // fruits.sort((a,b) => 
+    //     a.name.localeCompare(b.name)
+    //     // b.name.localeCompare(a.name) REVERSE ALPHABETICA
+    // )
+    // fruits.sort((a,b) => 
+    //     a.calories - b.calories //Numeric
+    //     b.calories - a.calories //Reverse Numeric
+    // )
+    const lowCalFruits = fruits.filter(fruit => fruit.calories < 100);
+    const listItems = lowCalFruits.map(lowCalFruit => <li key={lowCalFruit.id}>{lowCalFruit.name} : &nbsp; {lowCalFruit.calories}</li>);
+    return(<ol>{listItems}</ol>);
+}
+export default List
+
+function List(props){
+    const category = props.category;
+    const itemList = props.items;
+    // const fruits = [{id: 1, name : "banana", calories : 95},{id : 2,name : "apple", calories : 45},{id : 3, name : "orange", calories : 105},{id : 4, name: "coconut", calories : 159},{id : 5, name: "pineapple", calories : 37}];
+    // fruits.sort((a,b) => 
+    //     a.name.localeCompare(b.name)
+    //     // b.name.localeCompare(a.name) REVERSE ALPHABETICA
+    // )
+    // fruits.sort((a,b) => 
+    //     a.calories - b.calories //Numeric
+    //     b.calories - a.calories //Reverse Numeric
+    // )
+    // const lowCalFruits = fruits.filter(fruit => fruit.calories < 100);
+    const listItems = itemList.map(item => <li key={item.id}>{item.name} : &nbsp; {item.calories}</li>);
+    return(<><h3>{category}</h3><ol>{listItems}</ol></>);
+}
+export default List
+
+import List from './List.jsx';
+
+function App() {
+      const fruits = [{id: 1, name : "banana", calories : 95},{id : 2,name : "apple", calories : 45},{id : 3, name : "orange", calories : 105},{id : 4, name: "coconut", calories : 159},{id : 5, name: "pineapple", calories : 37}];
+  return(
+    <>{fruits.length > 0 ? <List items={fruits}category="Fruits"/> : null}</>);}
+export default App;
+
+//  short way to write ternary    {fruits.length > 0 && <List items={fruits} category="Fruits"/>}
+
+import PropTypes from 'prop-types'
+function List(props){
+    const category = props.category;
+    const itemList = props.items;
+    // const fruits = [{id: 1, name : "banana", calories : 95},{id : 2,name : "apple", calories : 45},{id : 3, name : "orange", calories : 105},{id : 4, name: "coconut", calories : 159},{id : 5, name: "pineapple", calories : 37}];
+    // fruits.sort((a,b) => 
+    //     a.name.localeCompare(b.name)
+    //     // b.name.localeCompare(a.name) REVERSE ALPHABETICA
+    // )
+    // fruits.sort((a,b) => 
+    //     a.calories - b.calories //Numeric
+    //     b.calories - a.calories //Reverse Numeric
+    // )
+    // const lowCalFruits = fruits.filter(fruit => fruit.calories < 100);
+    const listItems = itemList.map(item => <li key={item.id}>{item.name} : &nbsp; {item.calories}</li>);
+    return(<><h3>{category}</h3><ol>{listItems}</ol></>);
+}
+List.propTypes = {
+    category : PropTypes.string,
+    items : PropTypes.arrayOf(PropTypes.shape({id: PropTypes.number, name : PropTypes.string, calories : PropTypes.number}))
+}
+List.defaultProps = {
+    category : "Category",
+}
+export default List
+
+/<------------------------------------------------------->/
+7.
+function Button(){
+    let count = 0;
+    const handleClick = (name) => {
+        if(count < 3){
+            count++;
+            console.log(`${name} you clicked me ${count} time/s`);
+        }
+        else{
+            console.log(`${name} stop clicking me`)
+        }
+    };
+    return(
+        <button onClick={() => handleClick("Dzeko")}>Click me 🤭</button>
+    )
+}
+export default Button
+
+function Button(){
+    const handleClick = (e) => e.target.textContent = "OUCH! 😢";
+    return(
+        <button onDoubleClick={(e) => handleClick(e)}>Click me 🤭</button>
+    )
+}
+export default Button
+
+function ProfilePicture(){
+    const imageUrl = './src/assets/isagi.jpg';
+    const handleClick = (e) => e.target.style.display = "none";
+    return(
+        <img onClick={(e) => handleClick(e)} src={imageUrl}></img>
+    )
+}
+export default ProfilePicture
+
+/<------------------------------------------------------->/
+8.
+import React, {useState} from 'react';
+function MyComponent(){
+    const [name, setName] = useState("Guest");
+    const [age, setAge] = useState(0);
+    const [isEmployed, setIsEmployed] = useState(false);
+    const toggleEmployedStatus = () => {
+        setIsEmployed(!isEmployed);
+    }
+    const incrementAge = () => {
+        setAge(age + 1);
+    } 
+    const updateName = () => {
+        setName("Isagi")
+    } 
+    return(<>
+        <div>
+            <p>Name: {name}</p>
+            <button onClick={updateName}>Set Name</button>
+            <p>Age: {age}</p>
+            <button onClick={incrementAge}>Increment Age</button>
+            <p>Is Employed: {isEmployed ? "Yes" : "No"}</p>
+            <button onClick={toggleEmployedStatus}>Toggle Status</button>
+        </div>
+    </>);
+}
+export default MyComponent
+
+import React, {useState} from 'react'
+function Counter(){
+    const [count, setCount] = useState(0);
+
+    const increment = () => {
+        setCount(count + 1);
+    }
+    const decrement = () => {
+        setCount(count - 1);
+    }
+    const reset = () => {
+        setCount(0);
+    }
+    return(<>
+        <div className="counter-container">
+            <p className='count-display'>{count}</p>
+            <button className='counter-button' onClick={decrement}>Decrement</button>
+            <button className='counter-button' onClick={reset}>Reset</button>
+            <button className='counter-button' onClick={increment}>Increment</button>
+        </div>
+    </>);
+}
+export default Counter
+
+.counter-container{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.count-display{
+    font-size: 10em;
+    margin-top: 0;
+    margin-bottom: 50px;
+}
+.counter-button{
+    width: 150px;
+    height: 50px;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0px 5px;
+    background-color: cyan;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.counter-button:hover{
+    background-color: aquamarine;
+}
+
+/<------------------------------------------------------->/
+9.
+import React, {useState} from 'react' 
+function MyComponent(){
+    const [name,setName] = useState("Guest");
+    const [quantity,setQuantity] = useState(1);
+    const [comment,setComment] = useState("");
+    const [payment,setPayment] = useState("");
+    const [shipping,setShipping] = useState("Delivery");
+    function handleShippingChange(event){
+        setShipping(event.target.value);
+    }
+    function handlePaymentChange(event){
+        setPayment(event.target.value);
+    }
+    function handleCommentChange(event){
+        setComment(event.target.value);
+    }
+    function handleNameChange(event){
+        setName(event.target.value);
+    }
+    function handleQuantityChange(event){
+        setQuantity(event.target.value)
+    }
+    return(<>
+        <div>
+            <input type="text" value={name} onChange={handleNameChange}/>
+            <p>Name: {name}</p>
+
+            <input type="number" value={quantity} onChange={handleQuantityChange}/>
+            <p>Quantity: {quantity}</p>
+
+            <textarea value={comment} onChange={handleCommentChange} placeholder="Enter delivery instructions"></textarea>
+            <p>Comment: {comment}</p>
+            <select value={payment} onChange={handlePaymentChange}>
+                <option value="">Select an option</option>
+                <option value="Visa">Visa</option>
+                <option value="MasterCard">MasterCard</option>
+                <option value="Gift Card">Gift Card</option>
+            </select>
+            <p>Payment: {payment}</p>
+
+            <label>
+                <input type="radio" value="Pick Up" checked={shipping === "Pick Up"} onChange={handleShippingChange}/>
+                Pick Up
+            </label>
+            <label>
+                <input type="radio" value="Delivery" checked={shipping === "Delivery"} onChange={handleShippingChange}/>
+                Delivery
+            </label>
+            <p>Shipping: {shipping}</p>
+        </div>
+    </>)
+}
+export default MyComponent
+
+/<------------------------------------------------------->/
+10.
+import React, {useState} from "react"
+function ColorPicker(){
+    const [color, setColor] = useState("#FFFFFFF");
+    function handleColorChange(event){
+        setColor(event.target.value);
+    }
+    return(<>
+        <div className="color-picker-container">
+            <h1>Color Picker</h1>
+            <div style={{backgroundColor: color}} className="color-display">
+                <p>Selected Color: {color}</p>
+            </div>
+            <label htmlFor="">Select a color:</label>
+            <input type="color" value={color} onChange={handleColorChange}/>
+        </div>
+    </>)
+}
+export default ColorPicker
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.color-picker-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1{
+    margin: 50px;
+    font-size: 3rem;
+}
+.color-display{
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid hsl(0, 0%, 0%);
+    border-radius: 25px;
+    margin-bottom: 25px;   
+    transition: 0.25s ease;
+}
+.color-display p{
+    color: hsl(0, 0%, 25%);
+    font-size: 2rem;
+    text-align: center;   
+}
+label{
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+input[type="color"]{
+    width: 75px;
+    height: 50px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 3px solid;
+    color: hsl(0, 0%, 80%);
+}
+/<------------------------------------------------------->/
+11.import React, {useState} from "react";
+function MyComponent(){
+    const [count, setCount] = useState(0);
+    const increment = () => {
+        setCount(c => c + 1);
+        setCount(c => c + 1);
+        setCount(c => c + 1);
+    }
+    const decrement = () => {
+        setCount(c => c - 1);
+        setCount(c => c - 1);
+        setCount(c => c - 1);
+    }
+    const reset = () => {
+        setCount(0);
+    }
+    return(<>
+        <div className="counter-container">
+            <p className='count-display'>Count: {count}</p>
+            <button className='counter-button' onClick={decrement}>Decrement</button>
+            <button className='counter-button' onClick={reset}>Reset</button>
+            <button className='counter-button' onClick={increment}>Increment</button>
+        </div>
+    </>)
+}
+export default MyComponent
+/<------------------------------------------------------->/
+12.
+import React, {useState} from "react";
+function MyComponent(){
+    const [car, setCar] = useState({year : 2001 , make : "Peugeot", model : "206"});
+
+    function handleYearChange(event){
+        setCar(c => ({...c, year: event.target.value}));
+    }
+    function handleMakeChange(event){
+        setCar(c => ({...c, make: event.target.value}));
+    }
+    function handleModelChange(event){
+        setCar(c => ({...c, model: event.target.value}));
+    }
+    return(<>
+        <div>
+            <p>Your favourite car is: {car.year} {car.make} {car.model}</p>
+            <input type="number" value={car.year} onChange={handleYearChange}/><br />
+            <input type="text" value={car.make} onChange={handleMakeChange}/><br />
+            <input type="text" value={car.model} onChange={handleModelChange}/><br />
+        </div>
+    </>)
+}
+export default MyComponent
+
+/<------------------------------------------------------->/
+13.
+import React, {useState} from "react";
+function ToDoList(){
+    const [tasks, setTasks] = useState(["Eat Breakfast" , "Take a Shower", "Walk the Dog"]);
+    const [newTask, setNewTask] = useState("");
+    function handleInputChange(event){
+        setNewTask(event.target.value);
+    }
+    function addTask(){
+        if(newTask.trim() !== ""){
+            setTasks(t => [...t, newTask]);
+            setNewTask("");
+        }
+    }
+    function deleteTask(index){
+        const updateTasks = tasks.filter((_, i) => i !== index);
+        setTasks(updateTasks);
+    }
+
+    function moveTaskUp(index){
+        if(index > 0){
+            const updateTasks = [...tasks];
+            [updateTasks[index], updateTasks[index - 1]] = [updateTasks[index - 1], updateTasks[index]]
+            setTasks(updateTasks);
+        }
+    }
+
+    function moveTaskDown(index){
+        if(index < tasks.length - 1){
+            const updateTasks = [...tasks];
+            [updateTasks[index], updateTasks[index + 1]] = [updateTasks[index + 1], updateTasks[index]]
+            setTasks(updateTasks);
+        }
+    }
+    return(<>
+        <div className="to-do-list">
+            <h1>To Do List</h1>
+            <div>
+                <input type="text" placeholder="Enter a task..." value={newTask} onChange={handleInputChange}/>
+                <button className="add-button" onClick={addTask}>Add</button>
+            </div>
+            <ol>
+                {tasks.map((task, index) => <li key={index}><span className="text">{task}</span><button className="delete-button" onClick={() => deleteTask(index)}>Delete</button><button className="move-button" onClick={() => moveTaskUp(index)}>☝️</button><button className="move-button" onClick={() => moveTaskDown(index)}>👇</button></li>)}
+            </ol>
+        </div>
+    </>)
+}
+export default ToDoList;
+body{
+    background-color: hsl(0, 0%, 10%);
+}
+.to-do-list{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-top: 100px;
+}
+h1{
+    font-size: 4rem;
+    color: white;
+}
+button{
+    font-size: 1.7rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+.add-button{
+    background-color: hsl(125, 47%, 54%);
+}
+.add-button:hover{
+    background-color: hsl(125, 47%, 64%);
+}
+.delete-button{
+    background-color: hsl(10, 90%, 50%);
+}
+.delete-button:hover{
+    background-color: hsl(10, 90%, 60%);
+}
+.move-button{
+    background-color: hsl(207, 90%, 64%);
+}
+.move-button:hover{
+    background-color: hsl(207, 90%, 54%);
+}
+input[type="text"]{
+    font-size: 1.6rem;
+    padding: 10px;
+    border: 2px solid hsla(0, 0%, 80%, 0.5);
+    border-radius: 5px;
+    color:  hsla(0, 0%, 80%, 0.5);
+}
+ol{
+    padding: 0;
+}
+li{
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 15px;
+    background-color: hsl(0, 0%, 97%);
+    margin-bottom: 10px;
+    border: 3px solid  hsla(0, 0%, 85%, 0.75);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+.text{
+    flex: 1;
+}
+.delete-button, .move-button{
+    padding: 8px 12px;
+    font-size: 1.4rem;
+    margin-left: 10px;
+}
+/<------------------------------------------------------->/
+14.
+import React, {useState, useEffect} from "react";
+function MyComponent(){
+    const [count, setCount] = useState(0);
+    const [color, setColor] = useState("green");
+    useEffect(() => {
+        document.title = `Count: ${count} ${color}`
+    }, [count, color]);
+    function addCount(){
+        setCount(c => c + 1);
+    }
+    function subtractCount(){
+        setCount(c => c - 1);
+    }
+    function changeColor(){
+        setColor(c => c === "green" ? "red" : "green");
+    }
+    return(<>
+        <p style={{color: color}}>Count: {count}</p>
+        <button onClick={addCount}>Add</button>
+        <button onClick={subtractCount}>Subtract</button><br/>
+        <button onClick={changeColor}>Change Color</button>
+    </>);
+}
+export default MyComponent
+
+EXAMPLE 2:
+import React, {useState, useEffect} from "react";
+function MyComponent(){
+    const [width, setWidth] = useState(window.innerWidth);
+    const [height, setHeight] = useState(window.innerHeight); 
+    useEffect(() => {
+        window.addEventListener("resize", handleResize);
+        console.log("EVENT LISTENER ADDED");
+        return () => {
+            window.removeEventListener("resize", handleResize);
+            console.log("EVENT LISTENER REMOVED")
+        }
+    }, []);
+    useEffect(() => {
+        document.title = `Size: ${width} x ${height}`;
+    }, [width, height])
+    function handleResize(){
+        setWidth(window.innerWidth);
+        setHeight(window.innerHeight);
+    }
+    return(<>
+        <p>Window Width: {width}px</p>
+        <p>Window Height: {height}px</p>
+    </>);
+}
+export default MyComponent;
+
+/<------------------------------------------------------->/
+15.
+import React, {useState, useEffect} from "react";
+function DigitalClock(){
+    const [time, setTime] = useState(new Date());
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setTime(new Date());
+        }, 1000);
+        return () => {
+            clearInterval(intervalId);
+        }
+    }, []);
+    function formatTime(){
+        let hours = time.getHours();
+        const minutes = time.getMinutes();
+        const seconds = time.getSeconds();
+        const meridiem = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12 || 12;
+        return `${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)} ${meridiem}`
+    }
+    function padZero(number){
+        return (number < 10 ? "0" : "" ) + number;
+    }
+    return(<>
+        <div className="clock-container">
+            <div className="clock">
+                <span>{formatTime()}</span>
+            </div>
+        </div>
+    </>)
+}
+export default DigitalClock
+body{
+    background-image: url(./assets/isagi.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    align-items: center;
+}
+.clock-container{
+    backdrop-filter: blur(5px);
+    width: 100vw;
+    padding: 10px 0;
+}
+.clock{
+    color: white;
+    font-size: 6rem;
+    font-weight: bold;
+    font-family: monospace;
+    text-align: center;
+    text-shadow: 3px 3px 5px black;
+}
+/<------------------------------------------------------->/
+16.
+import React, {useState, createContext} from "react";
+import ComponentB from './ComponentB.jsx';
+export const UserContext = createContext();
+function ComponentA(){
+    const [user, setUser] = useState("Dzeko");
+    return(<>
+        <div className="box">
+            <h1>ComponentA</h1>
+            <h2>{`Hello ${user}`}</h2>
+            <UserContext.Provider value={user}>
+                <ComponentB user={user} />
+            </UserContext.Provider>
+        </div>
+    </>)
+}
+export default ComponentA;
+
+import ComponentC from './ComponentC.jsx';
+function ComponentB(){
+    return(<>
+        <div className="box">
+            <h1>ComponentB</h1>
+            <ComponentC/ >
+        </div>
+    </>)
+}
+export default ComponentB;
+
+import ComponentD from './ComponentD.jsx';
+import React, {useContext} from "react";
+import {UserContext} from './ComponentA';
+function ComponentC(){
+    const user = useContext(UserContext);
+    return(<>
+        <div className="box">
+            <h1>Component</h1>
+            <h2>{`Hello again ${user}`}</h2>
+            <ComponentD />
+        </div>
+    </>)
+}
+export default ComponentC;
+
+import React, {useContext} from "react";
+import {UserContext} from './ComponentA';
+function ComponentD(){
+    const user = useContext(UserContext);
+    return(<>
+        <div className="box">
+            <h1>Component D</h1>
+            <h2>{`Bye ${user}`}</h2>
+        </div>
+    </>)
+}
+export default ComponentD;
+
+/<------------------------------------------------------->/
+17.
+import React, {useState, useEffect, useRef} from "react"
+function MyComponent(){
+    const inputRef = useRef(null);
+    const inputRef2 = useRef(null);
+    const inputRef3 = useRef(null);
+    useEffect(() => {
+        console.log("COMPONENT RENDERED!")
+    });
+    function handleClick(){
+        inputRef.current.focus();
+        inputRef.current.style.backgroundColor = "yellow"
+        inputRef2.current.style.backgroundColor = ""
+        inputRef3.current.style.backgroundColor = ""
+
+    }
+    function handleClick2(){
+        inputRef2.current.focus();
+        inputRef2.current.style.backgroundColor = "yellow"
+        inputRef.current.style.backgroundColor = ""
+        inputRef3.current.style.backgroundColor = ""
+    }
+    function handleClick3(){
+        inputRef3.current.focus();
+        inputRef3.current.style.backgroundColor = "yellow"
+        inputRef.current.style.backgroundColor = ""
+        inputRef2.current.style.backgroundColor = ""
+    }
+    return(<>
+        <button onClick={handleClick}>Click Me!</button>
+        <input type="text" ref={inputRef}/>
+        <button onClick={handleClick2}>Click Me 2!</button>
+        <input type="text" ref={inputRef2}/>
+        <button onClick={handleClick3}>Click Me 3!</button>
+        <input type="text" ref={inputRef3}/>
+    </>)
+}
+export default MyComponent
+
+/<------------------------------------------------------->/
+18.
+import React, {useState, useEffect, useRef} from "react";
+function Stopwatch(){
+    const [isRunning, setIsRunning] = useState(false);
+    const [elapsedTime, setElapsedTime] = useState(0);
+    const intervalIdRef = useRef(null);
+    const startTimeRef = useRef(0);
+    useEffect(() => {
+        if(isRunning){
+            intervalIdRef.current = setInterval(() => {
+                setElapsedTime(Date.now() - startTimeRef.current)
+            }, 10);
+        }
+        return () => {
+            clearInterval(intervalIdRef.current);
+        }
+    }, [isRunning]);
+    function start(){
+        setIsRunning(true);
+        startTimeRef.current = Date.now() - elapsedTime;
+    }
+    function stop(){
+        setIsRunning(false);
+    }
+    function reset(){
+        setElapsedTime(0);
+        setIsRunning(false);
+    }
+    function formatTime(){
+        let hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+        let minutes = Math.floor(elapsedTime / (1000 * 60) % 60)
+        let seconds = Math.floor(elapsedTime / (1000 % 60));
+        let milliseconds = Math.floor((elapsedTime % 1000) / 10);
+        hours = String(hours).padStart(2, "0");
+        minutes = String(minutes).padStart(2, "0")
+        seconds = String(seconds).padStart(2, "0")
+        milliseconds = String(milliseconds).padStart(2, "0")
+        return `${hours}:${minutes}:${seconds}:${milliseconds}`;
+    }
+    return(<>
+        <div className="stopwatch">
+            <div className="display">
+                {formatTime()}
+            </div>
+            <div className="controls">
+                <button onClick={start} className="start-button">Start</button>
+                <button onClick={stop} className="stop-button">Stop</button>
+                <button onClick={reset} className="reset-button">Reset</button>
+            </div>
+        </div>
+    </>)
+}
+export default Stopwatch
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: lightgrey;
+}
+.stopwatch{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 5px solid;
+    border-radius: 50px;
+    background-color: white;
+    padding: 30px;
+}
+.display{
+    font-size: 5rem;
+    font-family: monospace;
+    font-weight: bold;
+    color: black;
+    text-shadow: 2px 2px 2px black;
+    margin-bottom: 25px;
+}
+.controls button{
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 5px;
+    min-width: 125px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.5s ease;
+}
+.start-button{
+    background-color: hsl(115, 100%, 40%);
+}
+.start-button:hover{
+    background-color: hsl(115, 100%, 35%);
+}
+.stop-button{
+    background-color: hsl(10, 90%, 50%);
+}
+.stop-button:hover{
+    background-color: hsl(10, 90%, 45%);
+}
+.reset-button{
+    background-color: hsl(205, 90%, 60%);
+}
+.reset-button:hover{
+    background-color: hsl(205, 90%, 55%);
+}
